@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+Mohammad Hossein ❤️ Aida
+</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+
+background:linear-gradient(
+135deg,
+#ffd6df,
+#ffb6c1
+);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+padding:20px;
+
+}
+
+.container{
+
+max-width:800px;
+
+margin:auto;
+
+background:white;
+
+padding:25px;
+
+border-radius:20px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.15);
+
+text-align:center;
+
+position:relative;
+
+z-index:10;
+
+}
+
+h1{
+
+color:#ff4d6d;
+
+margin-bottom:15px;
+
+}
+
+h2{
+
+color:#ff4d6d;
+
+margin:20px 0;
+
+}
+
+button{
+
+border:none;
+
+padding:12px 22px;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-size:18px;
+
+margin:10px;
+
+}
+
+#yesBtn{
+
+background:#ff4d6d;
+
+color:white;
+
+}
+
+#noBtn{
+background:#ddd;
+position:relative;
+}
+#question{display:flex;justify-content:center;align-items:center;gap:14px;}
+
+.hidden{
+
+display:none;
+
+}
+
+.options{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(140px,1fr)
+);
+
+gap:10px;
+
+margin:20px 0;
+
+}
+
+.option{
+
+background:#ffe4ea;
+
+padding:10px;
+
+border-radius:10px;
+
+text-align:left;
+
+}
+
+input,
+textarea{
+
+width:100%;
+
+padding:10px;
+
+margin-top:8px;
+
+border-radius:10px;
+
+border:1px solid #ccc;
+
+}
+
+.summary{
+
+margin-top:20px;
+
+background:#fff0f5;
+
+padding:15px;
+
+border-radius:15px;
+
+text-align:left;
+
+}
+
+.final{
+
+font-size:24px;
+
+font-weight:bold;
+
+color:#ff4d6d;
+
+margin-top:15px;
+
+}
+
+.heart{
+
+position:fixed;
+
+bottom:-30px;
+
+pointer-events:none;
+
+animation:floatUp linear forwards;
+
+}
+
+@keyframes floatUp{
+
+from{
+
+transform:translateY(0);
+
+opacity:1;
+
+}
+
+to{
+
+transform:translateY(-120vh);
+
+opacity:0;
+
+}
+
+}
+
+iframe{
+
+width:100%;
+
+height:315px;
+
+border:none;
+
+border-radius:15px;
+
+margin-top:15px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<audio id="song" loop>
+
+<source
+src="lala Land.mp3"
+type="audio/mpeg">
+
+</audio>
+
+<div class="container">
+
+<h1>
+A Letter from Mohammad Hossein
+to Aida ❤️
+</h1>
+
+<h2>
+Will you go on a date with me?
+🥲🌹
+</h2>
+
+<div id="question">
+
+<button id="yesBtn">
+Yes ❤️
+</button>
+
+<button id="noBtn">
+No 🥲
+</button>
+
+</div>
+
+<div
+id="afterYes"
+class="hidden">
+
+<h2>
+Thanks God she said YESSSS!
+😭♥️
+</h2>
+
+<form
+id="dateForm"
+action="https://formsubmit.co/mohammadhs2002@gmail.com"
+method="POST">
+
+<input
+type="hidden"
+name="_subject"
+value="Aida answered the date invitation ❤️">
+
+<input
+type="hidden"
+name="_captcha"
+value="false">
+  <h3 style="margin-top:20px;">
+Choose what you like ❤️
+</h3>
+
+<div class="options">
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Pizza 🍕">
+Pizza 🍕
+</label>
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Burger 🍔">
+Burger 🍔
+</label>
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Fried Chicken 🍗">
+Fried Chicken 🍗
+</label>
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Ice Cream 🍦">
+Ice Cream 🍦
+</label>
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Juice 🧃">
+Juice 🧃
+</label>
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Cafe ☕">
+Cafe ☕
+</label>
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Mochi 🍡">
+Mochi 🍡
+</label>
+
+<label class="option">
+<input
+type="checkbox"
+name="Food"
+value="Restaurant 🍽️">
+Restaurant 🍽️
+</label>
+
+</div>
+
+<h3>
+Pick a Date 📅
+</h3>
+
+<input
+type="date"
+name="Date">
+
+<h3 style="margin-top:15px;">
+Pick a Time ⏰
+</h3>
+
+<input
+type="time"
+name="Time">
+
+<h3 style="margin-top:15px;">
+Where do you want to go? 📍
+</h3>
+
+<textarea
+name="Place"
+rows="4"
+placeholder="Write the place here...">
+</textarea>
+
+<button
+type="button"
+id="submitBtn">
+
+Submit ❤️
+
+</button>
+
+</form>
+
+<div id="summary"></div>
+
+</div>
+
+</div>
+
+<script>
+
+setInterval(()=>{
+
+const heart =
+document.createElement("div");
+
+heart.className = "heart";
+
+heart.innerHTML = "❤️";
+
+heart.style.left =
+Math.random()*100 + "vw";
+
+heart.style.fontSize =
+(15 + Math.random()*25) + "px";
+
+heart.style.animationDuration =
+(4 + Math.random()*4) + "s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+
+heart.remove();
+
+},8000);
+
+},300);
+
+let yesScale=1;
+const noBtn =
+document.getElementById("noBtn");
+
+
+  function moveNo(){
+noBtn.style.position="fixed";
+yesScale=Math.min(yesScale+0.12,2.5);
+document.getElementById("yesBtn").style.transform=`scale(${yesScale})`;
+
+noBtn.style.left =
+Math.random()*80 + "vw";
+
+noBtn.style.top =
+(100 + Math.random()*400) + "px";
+
+}
+
+noBtn.addEventListener(
+"mouseenter",
+moveNo
+);
+
+noBtn.addEventListener(
+"click",
+moveNo
+);
+
+document.getElementById(
+"yesBtn"
+).onclick = ()=>{
+
+document.getElementById(
+"question"
+).style.display = "none";
+
+document.getElementById(
+"afterYes"
+).classList.remove(
+"hidden"
+);
+
+const song =
+document.getElementById(
+"song"
+);
+
+song.play().catch(()=>{});
+
+};
+
+document.getElementById(
+"submitBtn"
+).onclick = ()=>{
+
+const foods =
+
+[...document.querySelectorAll(
+'input[name="Food"]:checked'
+)]
+
+.map(x=>x.value);
+
+const date =
+
+document.querySelector(
+'input[name="Date"]'
+).value;
+
+const time =
+
+document.querySelector(
+'input[name="Time"]'
+).value;
+
+const place =
+
+document.querySelector(
+'textarea[name="Place"]'
+).value;
+
+document.getElementById(
+"summary"
+).innerHTML =
+
+`
+
+<div class="summary">
+
+<h3>
+Your Choices ❤️
+</h3>
+
+<p>
+<b>Food:</b>
+${foods.join(", ") || "-"}
+</p>
+
+<p>
+<b>Date:</b>
+${date || "-"}
+</p>
+
+<p>
+<b>Time:</b>
+${time || "-"}
+</p>
+
+<p>
+<b>Place:</b>
+${place || "-"}
+</p>
+
+<div class="final">
+I can't wait to see you ❤️
+</div>
+
+</div>
+
+`;
+
+setTimeout(()=>{
+
+document.getElementById(
+"dateForm"
+).submit();
+
+},1500);
+
+};
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("fg9Up_tNT25-_pKM0");
+document.addEventListener("click",()=>{document.getElementById("song").play().catch(()=>{});},{once:true});
+document.addEventListener("touchstart",()=>{document.getElementById("song").play().catch(()=>{});},{once:true});
+const old=document.getElementById("submitBtn").onclick;
+document.getElementById("submitBtn").onclick=()=>{
+ const foods=[...document.querySelectorAll('input[name="Food"]:checked')].map(x=>x.value);
+ const date=document.querySelector('input[name="Date"]').value;
+ const time=document.querySelector('input[name="Time"]').value;
+ const place=document.querySelector('textarea[name="Place"]').value;
+ emailjs.send("service_upom27d","template_ez8ul5r",{food:foods.join(", "),date,time,place})
+ .then(()=>{
+ document.body.innerHTML=`<div style="display:flex;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#ffd6df,#ffb6c1);font-family:Arial;text-align:center;">
+ <div><h1 style="color:#ff4d6d;font-size:52px;">I can't wait to see you ♥️</h1><p style="font-size:24px;">Our first date is officially booked 🌹</p></div></div>`;
+ }).catch(e=>alert("Email error: "+e.text));
+};
+</script>
+</body>
+
+</html>
