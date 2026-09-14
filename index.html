@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammad Hossein ❤️ Aida</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',Tahoma,Arial,sans-serif;
+}
+
+html,body{
+  height:100%;
+  overflow-x:hidden;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(-45deg,#3a1c34,#5c2a5e,#7a3b6e,#c25b8e,#e88ca8);
+  background-size:400% 400%;
+  animation:gradientShift 18s ease infinite;
+  padding:20px;
+  position:relative;
+}
+
+@keyframes gradientShift{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* stars */
+.stars-layer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+}
+
+.star{
+  position:absolute;
+  background:#fff;
+  border-radius:50%;
+  animation:twinkle ease-in-out infinite;
+  box-shadow:0 0 6px rgba(255,255,255,.8);
+}
+
+@keyframes twinkle{
+  0%,100%{opacity:.15;transform:scale(.8);}
+  50%{opacity:1;transform:scale(1.2);}
+}
+
+/* petals falling */
+.petal{
+  position:fixed;
+  top:-30px;
+  pointer-events:none;
+  z-index:2;
+  animation:petalFall linear infinite;
+  font-size:18px;
+  opacity:.9;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.2));
+}
+
+@keyframes petalFall{
+  0%{transform:translate(0,0) rotate(0deg);opacity:.9;}
+  100%{transform:translate(var(--drift),110vh) rotate(360deg);opacity:.3;}
+}
+
+/* floating hearts around edges */
+.edge-heart{
+  position:fixed;
+  pointer-events:none;
+  z-index:2;
+  font-size:16px;
+  opacity:.55;
+  animation:edgeFloat ease-in-out infinite;
+  filter:drop-shadow(0 0 4px rgba(255,120,160,.5));
+}
+
+@keyframes edgeFloat{
+  0%,100%{transform:translateY(0) scale(1);}
+  50%{transform:translateY(-18px) scale(1.15);}
+}
+
+.container{
+  max-width:760px;
+  margin:60px auto;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(6px);
+  padding:34px 28px;
+  border-radius:26px;
+  box-shadow:0 20px 60px rgba(60,10,50,.35);
+  text-align:center;
+  position:relative;
+  z-index:10;
+  border:1px solid rgba(255,255,255,.6);
+}
+
+h1{
+  color:#a3244f;
+  margin-bottom:12px;
+  font-size:1.7rem;
+  letter-spacing:.3px;
+}
+
+h2{
+  color:#c25b8e;
+  margin:18px 0;
+  font-weight:600;
+}
+
+button{
+  border:none;
+  padding:14px 26px;
+  border-radius:14px;
+  cursor:pointer;
+  font-size:18px;
+  margin:10px;
+  transition:transform .15s ease, box-shadow .15s ease;
+  font-weight:600;
+}
+
+#yesBtn{
+  background:linear-gradient(135deg,#e0457b,#a3244f);
+  color:white;
+  box-shadow:0 8px 20px rgba(163,36,79,.4);
+  animation:heartbeat 1.4s ease-in-out infinite;
+}
+
+@keyframes heartbeat{
+  0%,100%{transform:scale(1);}
+  15%{transform:scale(1.08);}
+  30%{transform:scale(1);}
+  45%{transform:scale(1.08);}
+  60%{transform:scale(1);}
+}
+
+#noBtn{
+  background:#f0e2e8;
+  color:#8a5468;
+  position:relative;
+  transition:left .28s ease, top .28s ease, transform .2s ease;
+}
+
+#question{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.hidden{display:none;}
+
+.options{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:10px;
+  margin:20px 0;
+}
+
+.option{
+  background:#fbe4ec;
+  padding:10px;
+  border-radius:12px;
+  text-align:left;
+  transition:background .2s;
+}
+
+.option:hover{background:#f6d0e0;}
+
+input,textarea{
+  width:100%;
+  padding:10px;
+  margin-top:8px;
+  border-radius:12px;
+  border:1px solid #e6c6d4;
+  font-size:15px;
+}
+
+.summary{
+  margin-top:20px;
+  background:#fff0f5;
+  padding:16px;
+  border-radius:16px;
+  text-align:left;
+}
+
+.final{
+  font-size:24px;
+  font-weight:bold;
+  color:#a3244f;
+  margin-top:15px;
+}
+
+.heart{
+  position:fixed;
+  bottom:-30px;
+  pointer-events:none;
+  animation:floatUp linear forwards;
+  z-index:5;
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0) rotate(0deg);opacity:1;}
+  to{transform:translateY(-120vh) rotate(25deg);opacity:0;}
+}
+
+/* burst overlay on Yes */
+#burstOverlay{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.burst-heart{
+  position:absolute;
+  font-size:26px;
+  opacity:0;
+  animation:burstOut 1.6s ease-out forwards;
+}
+
+@keyframes burstOut{
+  0%{transform:translate(0,0) scale(.2);opacity:1;}
+  70%{opacity:1;}
+  100%{transform:translate(var(--bx),var(--by)) scale(1.3);opacity:0;}
+}
+
+.confetti{
+  position:absolute;
+  top:-20px;
+  width:8px;
+  height:14px;
+  opacity:.95;
+  animation:confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+  0%{transform:translate(0,0) rotate(0deg);opacity:1;}
+  100%{transform:translate(var(--cx),110vh) rotate(720deg);opacity:.8;}
+}
+
+/* romantic final reveal */
+.reveal-word{
+  display:inline-block;
+  opacity:0;
+  transform:translateY(14px);
+  animation:wordIn .6s ease forwards;
+  margin-right:0.32em;
+}
+
+@keyframes wordIn{
+  to{opacity:1;transform:translateY(0);}
+}
+
+/* step wizard */
+.wizard{
+  position:relative;
+  overflow:hidden;
+  min-height:260px;
+}
+
+.step{
+  display:none;
+  animation:stepIn .45s ease;
+}
+
+.step.active{
+  display:block;
+}
+
+@keyframes stepIn{
+  from{opacity:0;transform:translateX(30px);}
+  to{opacity:1;transform:translateX(0);}
+}
+
+.step-nav{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  margin-top:22px;
+}
+
+.step-dots{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:18px;
+}
+
+.step-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:#f0c4d6;
+  transition:background .25s, transform .25s;
+}
+
+.step-dot.active{
+  background:#a3244f;
+  transform:scale(1.3);
+}
+
+.nextBtn,.backBtn{
+  background:linear-gradient(135deg,#e0457b,#a3244f);
+  color:#fff;
+}
+
+.backBtn{
+  background:#f0e2e8;
+  color:#8a5468;
+}
+
+iframe{
+  width:100%;
+  height:315px;
+  border:none;
+  border-radius:15px;
+  margin-top:15px;
+}
+
+@media (max-width:600px){
+  .container{padding:22px 16px;margin:30px auto;}
+  h1{font-size:1.35rem;}
+  button{padding:12px 18px;font-size:16px;}
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars-layer" id="starsLayer"></div>
+<div id="petalLayer"></div>
+<div id="edgeHeartLayer"></div>
+<div id="burstOverlay"></div>
+
+<audio id="song" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+  <h1>A Letter from Mohammad Hossein to Aida ❤️</h1>
+
+  <h2>Will you go on a date with me? 🥲🌹</h2>
+
+  <div id="question">
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 🥲</button>
+  </div>
+
+  <div id="afterYes" class="hidden">
+
+    <h2 id="thanksTitle"></h2>
+
+    <div class="step-dots" id="stepDots">
+      <div class="step-dot active"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+      <div class="step-dot"></div>
+    </div>
+
+    <form id="dateForm" action="https://formsubmit.co/mohammadhs2002@gmail.com" method="POST">
+      <input type="hidden" name="_subject" value="Aida answered the date invitation ❤️">
+      <input type="hidden" name="_captcha" value="false">
+
+      <div class="wizard">
+
+        <div class="step active" data-step="1">
+          <h3 style="margin-top:0;">Choose what you like ❤️</h3>
+          <div class="options">
+            <label class="option"><input type="checkbox" name="Food" value="Pizza 🍕"> Pizza 🍕</label>
+            <label class="option"><input type="checkbox" name="Food" value="Burger 🍔"> Burger 🍔</label>
+            <label class="option"><input type="checkbox" name="Food" value="Fried Chicken 🍗"> Fried Chicken 🍗</label>
+            <label class="option"><input type="checkbox" name="Food" value="Ice Cream 🍦"> Ice Cream 🍦</label>
+            <label class="option"><input type="checkbox" name="Food" value="Juice 🧃"> Juice 🧃</label>
+            <label class="option"><input type="checkbox" name="Food" value="Cafe ☕"> Cafe ☕</label>
+            <label class="option"><input type="checkbox" name="Food" value="Mochi 🍡"> Mochi 🍡</label>
+            <label class="option"><input type="checkbox" name="Food" value="Restaurant 🍽️"> Restaurant 🍽️</label>
+          </div>
+          <div class="step-nav">
+            <button type="button" class="nextBtn" data-next="2">Next ❤️</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="2">
+          <h3 style="margin-top:0;">Pick a Date 📅</h3>
+          <input type="date" name="Date">
+          <div class="step-nav">
+            <button type="button" class="backBtn" data-back="1">Back</button>
+            <button type="button" class="nextBtn" data-next="3">Next ❤️</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="3">
+          <h3 style="margin-top:0;">Pick a Time ⏰</h3>
+          <input type="time" name="Time">
+          <div class="step-nav">
+            <button type="button" class="backBtn" data-back="2">Back</button>
+            <button type="button" class="nextBtn" data-next="4">Next ❤️</button>
+          </div>
+        </div>
+
+        <div class="step" data-step="4">
+          <h3 style="margin-top:0;">Where do you want to go? 📍</h3>
+          <textarea name="Place" rows="4" placeholder="Write the place here..."></textarea>
+          <div class="step-nav">
+            <button type="button" class="backBtn" data-back="3">Back</button>
+            <button type="button" id="submitBtn">Submit ❤️</button>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+    <div id="summary"></div>
+
+  </div>
+
+</div>
+
+<script>
+/* ---------- background stars ---------- */
+const starsLayer = document.getElementById("starsLayer");
+for(let i=0;i<70;i++){
+  const s = document.createElement("div");
+  s.className = "star";
+  const size = 1 + Math.random()*2.5;
+  s.style.width = size+"px";
+  s.style.height = size+"px";
+  s.style.left = Math.random()*100 + "vw";
+  s.style.top = Math.random()*100 + "vh";
+  s.style.animationDuration = (2 + Math.random()*3) + "s";
+  s.style.animationDelay = (Math.random()*3) + "s";
+  starsLayer.appendChild(s);
+}
+
+/* ---------- falling petals ---------- */
+const petalLayer = document.getElementById("petalLayer");
+const petalEmojis = ["🌸","🌹","🥀","🏵️"];
+function spawnPetal(){
+  const p = document.createElement("div");
+  p.className = "petal";
+  p.textContent = petalEmojis[Math.floor(Math.random()*petalEmojis.length)];
+  p.style.left = Math.random()*100 + "vw";
+  p.style.setProperty("--drift", (Math.random()*160-80)+"px");
+  p.style.animationDuration = (7 + Math.random()*6) + "s";
+  p.style.fontSize = (14 + Math.random()*14) + "px";
+  petalLayer.appendChild(p);
+  setTimeout(()=>p.remove(), 14000);
+}
+setInterval(spawnPetal, 500);
+for(let i=0;i<8;i++) setTimeout(spawnPetal, i*300);
+
+/* ---------- edge floating hearts ---------- */
+const edgeLayer = document.getElementById("edgeHeartLayer");
+function spawnEdgeHearts(){
+  const positions = [
+    {top:"5%",left:"3%"},{top:"15%",left:"92%"},{top:"40%",left:"2%"},
+    {top:"55%",left:"94%"},{top:"75%",left:"4%"},{top:"85%",left:"90%"},
+    {top:"25%",left:"6%"},{top:"65%",left:"3%"}
+  ];
+  positions.forEach((pos,i)=>{
+    const h = document.createElement("div");
+    h.className = "edge-heart";
+    h.textContent = "💗";
+    h.style.top = pos.top;
+    h.style.left = pos.left;
+    h.style.animationDuration = (2.5 + Math.random()*2) + "s";
+    h.style.animationDelay = (Math.random()*2) + "s";
+    edgeLayer.appendChild(h);
+  });
+}
+spawnEdgeHearts();
+
+/* ---------- ambient rising hearts (existing feature, kept) ---------- */
+setInterval(()=>{
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (15 + Math.random()*25) + "px";
+  heart.style.animationDuration = (4 + Math.random()*4) + "s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(), 8000);
+}, 400);
+
+/* ---------- No button runs away, playfully ---------- */
+let yesScale = 1;
+const noBtn = document.getElementById("noBtn");
+const noPhrases = ["No 🥲","Are you sure? 😳","Really? 🥺","Think again! 😭","Nope, try again 😅","Catch me first! 🏃‍♀️","Last chance 🙈","C'mon... 💔"];
+let noIndex = 0;
+
+function moveNo(){
+  noBtn.style.position = "fixed";
+  yesScale = Math.min(yesScale + 0.12, 2.6);
+  document.getElementById("yesBtn").style.transform = `scale(${yesScale})`;
+  noBtn.style.left = Math.random()*80 + "vw";
+  noBtn.style.top = (100 + Math.random()*400) + "px";
+  noIndex = (noIndex+1) % noPhrases.length;
+  noBtn.textContent = noPhrases[noIndex];
+  noBtn.style.transform = `rotate(${Math.random()*30-15}deg)`;
+}
+
+noBtn.addEventListener("mouseenter", moveNo);
+noBtn.addEventListener("click", (e)=>{ e.preventDefault(); moveNo(); });
+noBtn.addEventListener("touchstart", (e)=>{ e.preventDefault(); moveNo(); }, {passive:false});
+
+/* ---------- Yes click: big burst then reveal form ---------- */
+const burstOverlay = document.getElementById("burstOverlay");
+const burstHeartEmojis = ["❤️","💖","💗","💕","💞","🌹"];
+
+function launchBurst(){
+  const count = 60;
+  for(let i=0;i<count;i++){
+    const h = document.createElement("div");
+    h.className = "burst-heart";
+    h.textContent = burstHeartEmojis[Math.floor(Math.random()*burstHeartEmojis.length)];
+    h.style.left = "50%";
+    h.style.top = "50%";
+    const angle = Math.random()*Math.PI*2;
+    const dist = 150 + Math.random()*350;
+    h.style.setProperty("--bx", Math.cos(angle)*dist + "px");
+    h.style.setProperty("--by", Math.sin(angle)*dist + "px");
+    h.style.animationDelay = (Math.random()*0.3) + "s";
+    burstOverlay.appendChild(h);
+    setTimeout(()=>h.remove(), 2200);
+  }
+
+  const confettiColors = ["#e0457b","#a3244f","#ffd166","#ffffff","#c25b8e","#ff9fc7"];
+  for(let i=0;i<70;i++){
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = confettiColors[Math.floor(Math.random()*confettiColors.length)];
+    c.style.setProperty("--cx", (Math.random()*200-100)+"px");
+    c.style.animationDuration = (2 + Math.random()*1.5) + "s";
+    c.style.animationDelay = (Math.random()*0.4) + "s";
+    burstOverlay.appendChild(c);
+    setTimeout(()=>c.remove(), 4000);
+  }
+}
+
+function revealFinalTitle(){
+  const title = document.getElementById("thanksTitle");
+  const text = "Thanks God she said YESSSS! 😭♥️";
+  title.innerHTML = "";
+  text.split(" ").forEach((word,i)=>{
+    const span = document.createElement("span");
+    span.className = "reveal-word";
+    span.style.animationDelay = (i*0.15) + "s";
+    span.textContent = word;
+    title.appendChild(span);
+  });
+}
+
+/* ---------- step wizard navigation ---------- */
+const dots = document.querySelectorAll(".step-dot");
+
+function goToStep(n){
+  document.querySelectorAll(".step").forEach(s=>{
+    s.classList.toggle("active", s.dataset.step === String(n));
+  });
+  dots.forEach((d,i)=>{
+    d.classList.toggle("active", i === n-1);
+  });
+}
+
+document.querySelectorAll(".nextBtn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    goToStep(btn.dataset.next);
+  });
+});
+
+document.querySelectorAll(".backBtn").forEach(btn=>{
+  btn.addEventListener("click", ()=>{
+    goToStep(btn.dataset.back);
+  });
+});
+
+document.getElementById("yesBtn").onclick = ()=>{
+  document.getElementById("question").style.display = "none";
+
+  launchBurst();
+
+  const song = document.getElementById("song");
+  song.play().catch(()=>{});
+
+  setTimeout(()=>{
+    document.getElementById("afterYes").classList.remove("hidden");
+    revealFinalTitle();
+  }, 2200);
+};
+
+/* ---------- form submit summary ---------- */
+document.getElementById("submitBtn").onclick = ()=>{
+  const foods = [...document.querySelectorAll('input[name="Food"]:checked')].map(x=>x.value);
+  const date = document.querySelector('input[name="Date"]').value;
+  const time = document.querySelector('input[name="Time"]').value;
+  const place = document.querySelector('textarea[name="Place"]').value;
+
+  document.getElementById("summary").innerHTML = `
+    <div class="summary">
+      <h3>Your Choices ❤️</h3>
+      <p><b>Food:</b> ${foods.join(", ") || "-"}</p>
+      <p><b>Date:</b> ${date || "-"}</p>
+      <p><b>Time:</b> ${time || "-"}</p>
+      <p><b>Place:</b> ${place || "-"}</p>
+      <div class="final">I can't wait to see you ❤️</div>
+    </div>
+  `;
+};
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+emailjs.init("fg9Up_tNT25-_pKM0");
+
+document.addEventListener("click", ()=>{ document.getElementById("song").play().catch(()=>{}); }, {once:true});
+document.addEventListener("touchstart", ()=>{ document.getElementById("song").play().catch(()=>{}); }, {once:true});
+
+document.getElementById("submitBtn").onclick = ()=>{
+  const foods = [...document.querySelectorAll('input[name="Food"]:checked')].map(x=>x.value);
+  const date = document.querySelector('input[name="Date"]').value;
+  const time = document.querySelector('input[name="Time"]').value;
+  const place = document.querySelector('textarea[name="Place"]').value;
+
+  emailjs.send("service_upom27d","template_ez8ul5r",{food:foods.join(", "),date,time,place})
+    .then(()=>{
+      document.body.innerHTML = `
+        <div style="display:flex;justify-content:center;align-items:center;height:100vh;
+        background:linear-gradient(-45deg,#3a1c34,#5c2a5e,#7a3b6e,#c25b8e,#e88ca8);
+        background-size:400% 400%;animation:gradientShift 18s ease infinite;
+        font-family:Arial;text-align:center;">
+          <div>
+            <h1 style="color:#fff;font-size:44px;text-shadow:0 4px 20px rgba(0,0,0,.3);">
+              I can't wait to see you ♥️
+            </h1>
+            <p style="font-size:22px;color:#ffe4ee;margin-top:10px;">
+              Our first date is officially booked 🌹
+            </p>
+          </div>
+        </div>
+        <style>
+          @keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
+        </style>
+      `;
+    })
+    .catch(e=>alert("Email error: "+e.text));
+};
+</script>
+
+</body>
+</html>
